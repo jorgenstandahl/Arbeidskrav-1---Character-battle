@@ -1,0 +1,25 @@
+{
+  "name": "arbeidskrav-1---character-battle",
+  "version": "1.0.0",
+  "description": "Arbeidskrav 1",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jorgenstandahl/Arbeidskrav-1---Character-battle.git"
+  },
+  "author": "Jorgen Standahl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jorgenstandahl/Arbeidskrav-1---Character-battle/issues"
+  },
+  "homepage": "https://github.com/jorgenstandahl/Arbeidskrav-1---Character-battle#readme",
+  "dependencies": {
+    "jest": "^29.7.0"
+  }
+}
