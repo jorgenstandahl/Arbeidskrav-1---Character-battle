@@ -26,53 +26,54 @@ const makeCharacter = () => {
     profileImg: chosenImg,
   };
   localStorage.setItem("playerCharacter", JSON.stringify(playerCharacter));
-  showCharacter()
+  showCharacter();
 };
 
 const showCharacter = () => {
-    let collectedPlayer = localStorage.getItem("playerCharacter");
-    collectedPlayer = JSON.parse(collectedPlayer);
-    const battleArea = document.getElementById("battle-area");
-  
-    const displayExist = document.getElementById("character-display")
-    if (displayExist) {
-      displayExist.remove()
-    }
-  
-    let characterDisplay = document.createElement("div");
-    characterDisplay.id = "character-display";
-    characterDisplay.classList = "profile-card";
-  
-    battleArea.appendChild(characterDisplay);
-  
-    let displayH2 = document.createElement("h2");
-    displayH2.innerText = "Helten";
-  
-    let displayImg = document.createElement("img");
-    displayImg.id = "char-img";
-    displayImg.alt = "Profilbilde";
-    displayImg.src = collectedPlayer.profileImg;
-  
-    let charNameP = document.createElement("p");
-    charNameP.id = "char-name";
-    charNameP.innerText = collectedPlayer.name;
-  
-    let charHpP = document.createElement("p");
-    charHpP.id = "char-hp";
-    charHpP.innerText = "Hp: " + collectedPlayer.hp;
-  
-    let charAttackP = document.createElement("p");
-    charAttackP = "char-attack";
-    charAttackP = "Attack: " + collectedPlayer.attack;
-  
-    characterDisplay.append(
-      displayH2,
-      displayImg,
-      charNameP,
-      charHpP,
-      charAttackP
-    );
-  };
+  let collectedPlayer = localStorage.getItem("playerCharacter");
+  collectedPlayer = JSON.parse(collectedPlayer);
+  const battleArea = document.getElementById("battle-area");
+
+  const displayExist = document.getElementById("character-display");
+  if (displayExist) {
+    displayExist.remove();
+  }
+
+  let characterDisplay = document.createElement("div");
+  characterDisplay.id = "character-display";
+  characterDisplay.classList = "profile-card";
+
+  battleArea.appendChild(characterDisplay);
+
+  let displayH2 = document.createElement("h2");
+  displayH2.innerText = "Helten";
+
+  let displayImg = document.createElement("img");
+  displayImg.id = "char-img";
+  displayImg.alt = "Profilbilde";
+  displayImg.src = collectedPlayer.profileImg;
+
+  let charNameP = document.createElement("p");
+  charNameP.id = "char-name";
+  charNameP.innerText = collectedPlayer.name;
+
+  let charHpP = document.createElement("p");
+  charHpP.id = "char-hp";
+  charHpP.innerText = "Hp: " + collectedPlayer.hp;
+
+  let charAttackP = document.createElement("p");
+  charAttackP = "char-attack";
+  charAttackP = "Attack: " + collectedPlayer.attack;
+
+  characterDisplay.append(
+    displayH2,
+    displayImg,
+    charNameP,
+    charHpP,
+    charAttackP
+  );
+  clearFightSpace()
+};
 
 createButton.addEventListener("click", makeCharacter);
 
@@ -110,69 +111,87 @@ const makeEnemy = () => {
     enemyHp: randomizer(101) + 50,
     enemyAttack: randomizer(31) + 10,
   };
-  
+
   localStorage.setItem("enemyCharacter", JSON.stringify(enemyCharacter));
-  showEnemy()
+  showEnemy();
+  clearFightSpace()
 };
 
 const showEnemy = () => {
-    let collectedEnemy = localStorage.getItem("enemyCharacter");
-    collectedEnemy = JSON.parse(collectedEnemy);
-    const battleArea = document.getElementById("battle-area");
-  
-    const displayExist = document.getElementById("enemy-fight-display")
-    if (displayExist) {
-      displayExist.remove()
-    }
-  
-    let enemyDisplay = document.createElement("div");
-    enemyDisplay.id = "enemy-fight-display";
-    enemyDisplay.classList = "profile-card";
-  
-    battleArea.appendChild(enemyDisplay);
-  
-    let displayH2 = document.createElement("h2");
-    displayH2.innerText = "Fiende";
-  
-    let displayImg = document.createElement("img");
-    displayImg.id = "enemy-fight-img";
-    displayImg.alt = "Fiendens profilbilde";
-    displayImg.src = collectedEnemy.enemyPic;
-  
-    let enemyNameP = document.createElement("p");
-    enemyNameP.id = "enemy-fight-name";
-    enemyNameP.innerText = collectedEnemy.name;
-  
-    let enemyHpP = document.createElement("p");
-    enemyHpP.id = "enemy-fight-hp";
-    enemyHpP.innerText = "Hp: " + collectedEnemy.enemyHp;
-  
-    let enemyAttackP = document.createElement("p");
-    enemyAttackP = "enemy-fight-attack";
-    enemyAttackP = "Attack: " + collectedEnemy.enemyAttack;
-  
-    enemyDisplay.append(
-      displayH2,
-      displayImg,
-      enemyNameP,
-      enemyHpP,
-      enemyAttackP
-    );
-  };
+  let collectedEnemy = localStorage.getItem("enemyCharacter");
+  collectedEnemy = JSON.parse(collectedEnemy);
+  const battleArea = document.getElementById("battle-area");
+
+  const displayExist = document.getElementById("enemy-fight-display");
+  if (displayExist) {
+    displayExist.remove();
+  }
+
+  let enemyDisplay = document.createElement("div");
+  enemyDisplay.id = "enemy-fight-display";
+  enemyDisplay.classList = "profile-card";
+
+  battleArea.appendChild(enemyDisplay);
+
+  let displayH2 = document.createElement("h2");
+  displayH2.innerText = "Fiende";
+
+  let displayImg = document.createElement("img");
+  displayImg.id = "enemy-fight-img";
+  displayImg.alt = "Fiendens profilbilde";
+  displayImg.src = collectedEnemy.enemyPic;
+
+  let enemyNameP = document.createElement("p");
+  enemyNameP.id = "enemy-fight-name";
+  enemyNameP.innerText = collectedEnemy.name;
+
+  let enemyHpP = document.createElement("p");
+  enemyHpP.id = "enemy-fight-hp";
+  enemyHpP.innerText = "Hp: " + collectedEnemy.enemyHp;
+
+  let enemyAttackP = document.createElement("p");
+  enemyAttackP = "enemy-fight-attack";
+  enemyAttackP = "Attack: " + collectedEnemy.enemyAttack;
+
+  enemyDisplay.append(
+    displayH2,
+    displayImg,
+    enemyNameP,
+    enemyHpP,
+    enemyAttackP
+  );
+};
 
 generateEnemy.addEventListener("click", makeEnemy);
 
 // Seksjon 3: Sloss!
+const startFight = document.getElementById("start-fight");
 
-const fetchHero = () => {
-  let collectedHero = localStorage.getItem("playerCharacter");
-  collectedHero = JSON.parse(collectedHero);
-  return collectedHero;
+const fight = () => {
+  let collectedPlayer = localStorage.getItem("playerCharacter");
+  collectedPlayer = JSON.parse(collectedPlayer);
+  let collectedEnemy = localStorage.getItem("enemyCharacter");
+  collectedEnemy = JSON.parse(collectedEnemy);
+  const remainingPlayerHp = collectedPlayer.hp - collectedEnemy.enemyAttack;
+  const remainingEnemyHp = collectedEnemy.enemyHp - collectedPlayer.attack;
+  const battleResult = document.getElementById("battle-result");
+  
+
+  if (remainingPlayerHp > remainingEnemyHp) {
+    battleResult.innerText = `Du vant! Du har ${remainingPlayerHp}HP igjen og fienden har kun ${remainingEnemyHp}HP igjen.`;
+  } else if (remainingPlayerHp < remainingEnemyHp) {
+    battleResult.innerText = `Du tapte! Du har kun  ${remainingPlayerHp}HP igjen og fienden har ${remainingEnemyHp}HP igjen.`;
+  } else {
+    battleResult.innerText = `Uavgjort! Dere har begge ${remainingPlayerHp}HP igjen`;
+  }
 };
+startFight.addEventListener("click", fight);
 
-
-
-
+const clearFightSpace = () =>{
+    const resultExist = document.getElementById("battle-result");
+    if (resultExist) {
+      resultExist.innerText =""
+}}
 
 //Legge inn heltene fra localStorage og vise dem i HTML
 
