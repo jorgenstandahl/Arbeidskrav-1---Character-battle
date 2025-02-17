@@ -32,13 +32,13 @@
           <img src="assets/mage.webp" class="profile-img" alt="Bilde 3" />
         </div>
 
-        <button id="create-character">Lag karakter</button>
+        <button id="create-character" onclick="makeCharacter()">Lag karakter</button>
       </div>
 
       <!-- Oppgave 2: Generer fiende -->
       <div id="enemy-creator" class="section">
         <h1>Generer fiende</h1>
-        <button id="generate-enemy">Generer fiende</button>
+        <button id="generate-enemy" onclick="makeEnemy()">Generer fiende</button>
         <div id="enemy-display">
           <img id="enemy-img" class="profile-img" src="" />
           <p id="enemy-name"></p>
@@ -69,11 +69,11 @@
           <p id="enemy-fight-attack"></p>
         </div>
       -->
-        <button id="start-fight">Start kamp</button>
+        <button id="start-fight" onclick="fight()">Start kamp</button>
         <p id="battle-result"></p>
       </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="app.js" defer></script>
   </body>
 </html>

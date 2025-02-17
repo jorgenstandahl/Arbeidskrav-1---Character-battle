@@ -21,7 +21,12 @@
     "url": "https://github.com/jorgenstandahl/Arbeidskrav-1---Character-battle/issues"
   },
   "homepage": "https://github.com/jorgenstandahl/Arbeidskrav-1---Character-battle#readme",
-  "dependencies": {
+ 
+  "devDependencies": {
+    "jest-environment-jsdom": "^29.7.0",
     "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
   }
 }

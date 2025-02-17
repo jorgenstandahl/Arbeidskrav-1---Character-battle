@@ -7,17 +7,16 @@
 const nameInput = document.getElementById("character-name");
 const hpInput = document.getElementById("character-hp");
 const attackInput = document.getElementById("attack-damage");
-const characterImageChoice = document.getElementsByClassName("profile-pics");
-const createButton = document.getElementById("create-character");
 let chosenImg = "";
-console.log(nameInput.value);
 
+//Sjekker hvilket bilde som ble trykket på
 document.querySelectorAll("img").forEach(function (img) {
   img.onclick = function () {
     chosenImg = this.src;
   };
 });
 
+//Lagrer hentet data inn i et objekt og lagrer objektet i localStorage
 const makeCharacter = () => {
   const playerCharacter = {
     name: nameInput.value,
@@ -29,11 +28,13 @@ const makeCharacter = () => {
   showCharacter();
 };
 
+//Lager HTML semantikken og fyller inn med data hentet fra localStorage 
 const showCharacter = () => {
   let collectedPlayer = localStorage.getItem("playerCharacter");
   collectedPlayer = JSON.parse(collectedPlayer);
   const battleArea = document.getElementById("battle-area");
 
+  //Tømmer html character-display så den blir erstattet istedenfor lagt til
   const displayExist = document.getElementById("character-display");
   if (displayExist) {
     displayExist.remove();
@@ -72,17 +73,18 @@ const showCharacter = () => {
     charHpP,
     charAttackP
   );
-  clearFightSpace()
+  clearFightSpace();
 };
-
-createButton.addEventListener("click", makeCharacter);
 
 //Seksjon 2: Generer fiende
 const generateEnemy = document.getElementById("generate-enemy");
 
+//Returnerer et tilfeldig tall basert på tallet man kaller funskjonen med
 const randomizer = (maxValue) => {
   return Math.floor(Math.random() * maxValue);
 };
+
+//Returnerer et tilfeldig navn basertpå randomizer funskjonen
 const enemyName = () => {
   if (randomizer(3) === 0) {
     return "Goblin";
@@ -93,6 +95,7 @@ const enemyName = () => {
   }
 };
 
+//Returnerer et tilfeldig bilde basert på randomizer funskjonen
 const enemyImg = () => {
   if (randomizer(3) === 0) {
     return "./assets/dragon.jpg";
@@ -102,8 +105,8 @@ const enemyImg = () => {
     return "./assets/swamp-monster.jpg";
   }
 };
-console.log(enemyImg());
 
+//Lagrer fiendens informasjon i et objekt og lagrer det i localStorage
 const makeEnemy = () => {
   const enemyCharacter = {
     name: enemyName(),
@@ -114,9 +117,10 @@ const makeEnemy = () => {
 
   localStorage.setItem("enemyCharacter", JSON.stringify(enemyCharacter));
   showEnemy();
-  clearFightSpace()
+  clearFightSpace();
 };
 
+//Lager html tagger og fyller inn med hentet data fra localStorage
 const showEnemy = () => {
   let collectedEnemy = localStorage.getItem("enemyCharacter");
   collectedEnemy = JSON.parse(collectedEnemy);
@@ -162,20 +166,18 @@ const showEnemy = () => {
   );
 };
 
-generateEnemy.addEventListener("click", makeEnemy);
-
 // Seksjon 3: Sloss!
 const startFight = document.getElementById("start-fight");
 
+//Henter data fra localStorage og avgjør om spiller eller fiende står igjen med mest hp etter angrep
 const fight = () => {
   let collectedPlayer = localStorage.getItem("playerCharacter");
   collectedPlayer = JSON.parse(collectedPlayer);
   let collectedEnemy = localStorage.getItem("enemyCharacter");
   collectedEnemy = JSON.parse(collectedEnemy);
-  const remainingPlayerHp = collectedPlayer.hp - collectedEnemy.enemyAttack;
-  const remainingEnemyHp = collectedEnemy.enemyHp - collectedPlayer.attack;
+  let remainingPlayerHp = collectedPlayer.hp - collectedEnemy.enemyAttack;
+  let remainingEnemyHp = collectedEnemy.enemyHp - collectedPlayer.attack;
   const battleResult = document.getElementById("battle-result");
-  
 
   if (remainingPlayerHp > remainingEnemyHp) {
     battleResult.innerText = `Du vant! Du har ${remainingPlayerHp}HP igjen og fienden har kun ${remainingEnemyHp}HP igjen.`;
@@ -185,15 +187,20 @@ const fight = () => {
     battleResult.innerText = `Uavgjort! Dere har begge ${remainingPlayerHp}HP igjen`;
   }
 };
-startFight.addEventListener("click", fight);
 
-const clearFightSpace = () =>{
-    const resultExist = document.getElementById("battle-result");
-    if (resultExist) {
-      resultExist.innerText =""
-}}
+//Nullstiller slåssområdet når den kalles på
+const clearFightSpace = () => {
+  const resultExist = document.getElementById("battle-result");
+  if (resultExist) {
+    resultExist.innerText = "";
+  }
+};
+
+module.exports = { randomizer, makeCharacter, makeEnemy, enemyName };
+
 
 //Legge inn heltene fra localStorage og vise dem i HTML
 
 //Du skal vise frem helten og fienden. Se HTML-dokumentet for hvordan fremvisningen skal se ut, med tanke på hvilke tagger, hierarki og hvilke klasser de skal ha.
 //Du skal lage den strukturen som vist i HTML, her i Javascript og legge de til i div'en "battle-arena" fra HTML.
+
